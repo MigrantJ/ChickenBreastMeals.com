@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(app) {
+module.exports = function(app, jwtauth) {
 	app.config(function($routeProvider) {
 		$routeProvider
 
@@ -27,7 +27,22 @@ module.exports = function(app) {
 
 		.when('/admin', {
 			templateUrl: '/views/admin/admin.html',
-			controller: 'cbmMainController'
+			controller: 'cbmAdminController'
+		})
+
+		.when('/login', {
+			templateUrl: '/views/admin/login.html',
+			controller: 'cbmUserController'
+		})
+
+		.when('/signup', {
+			templateUrl: '/views/admin/login.html',
+			controller: 'cbmUserController'
+		})
+
+		.when('/logout', {
+			templateUrl: '/views/admin/login.html',
+			controller: 'cbmUserController'
 		})
 
 		.otherwise({

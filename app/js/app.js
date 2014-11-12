@@ -61,8 +61,10 @@ var cbmApp = angular.module('cbmApp',['ngRoute']);
 require('./controllers/cbm-main-controller')(cbmApp);
 require('./controllers/cbm-admin-controller')(cbmApp);
 require('./controllers/cbm-recipe-controller')(cbmApp);
+require('./controllers/cbm-user-controller')(cbmApp);
 //services
 require('./services/meals-server')(cbmApp);
+require('./services/auth')(cbmApp);
 
 //directives
 require('./directives/admin-edit-meal-form')(cbmApp);

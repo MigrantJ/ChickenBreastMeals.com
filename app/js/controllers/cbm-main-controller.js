@@ -6,6 +6,7 @@ module.exports = function(app) {
 		$scope.siteName = "Chicken Breast Meals.com";
 		$scope.orderProp = 'cooktime';
 
+
 		$scope.getOptionsFor = function(propName) {
 			return ($scope.meals || []).map(function (meal) {
 				return meal[propName];
@@ -35,7 +36,7 @@ module.exports = function(app) {
 			$location.path('/recipe/' + meal.url);
 		};
 
-		//get, create, edit, delete
+
 		$scope.getMeals = function() {
 			$http.get('/db').success(function(data) {
 				$scope.meals = data;

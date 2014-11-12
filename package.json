@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/MJGrant/ChickenBreastMeals.com",
   "devDependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "chai": "^1.9.2",
     "chai-http": "^1.0.0",
     "debowerify": "^0.8.1",

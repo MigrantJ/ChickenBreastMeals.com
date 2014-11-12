@@ -3,7 +3,7 @@ var fs = require('fs');
 //reboot grunt manually if you edit this file
 var Meal = require('../models/meal');
 
-module.exports = function(app) {
+module.exports = function(app, jwtauth) {
 	var baseUrl = '/db';
 
 	app.get(baseUrl, function(req, res) {
@@ -20,10 +20,7 @@ module.exports = function(app) {
 		});
 	});
 
-	//todo: add authorization
-	app.post(baseUrl, function(req, res) {
-		//res.send({"testMeal":"Test mealName"});
-		
+	app.post(baseUrl, jwtauth, function(req, res) {
 		var meal = new Meal(req.body);
 		meal.save(function(err, resMeal) {
 			if (err) return res.status(500).json(err);
@@ -33,14 +30,14 @@ module.exports = function(app) {
 	});
 
 
-	app.get(baseUrl + '/getOne/:id', function(req, res) {
+	app.get(baseUrl + '/getOne/:id', jwtauth, function(req, res) {
 		Meal.findOne({'_id':req.params.id}, function(err, meal){
 			if(err) return res.status(500).json(err);
 			return res.json(meal)
 		})
 	});
 
-	app.put(baseUrl + '/:id', function(req, res) {
+	app.put(baseUrl + '/:id', jwtauth, function(req, res) {
 		var meal = req.body;
 		//delete meal._id;
 		Meal.findOneAndUpdate({'_id': req.params.id}, meal, function(err, resMeal) {
@@ -49,7 +46,7 @@ module.exports = function(app) {
 		});
 	});
 
-	app.delete(baseUrl + '/:id', function(req, res) {
+	app.delete(baseUrl + '/:id', jwtauth, function(req, res) {
 		Meal.remove({'_id': req.params.id}, function(err, resMeal) {
 			if (err) return res.status(500).json(err);
 			return res.status(200).json({'msg':'deleted'});
